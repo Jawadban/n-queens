@@ -22,7 +22,7 @@
       return _(_.range(this.get('n'))).map(function(rowIndex) {
         return this.get(rowIndex);
       }, this);
-    },
+    }, 
 
     togglePiece: function(rowIndex, colIndex) {
       this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
@@ -79,12 +79,28 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      this.get(rowIndex);
+      var counter = 0;
+      for (var i = 0; i < this.get(rowIndex).length; i++) {
+        counter = counter + this.get(rowIndex)[i];
+      }
+      if (counter > 1) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      //var rows = this.rows();
+      var condition = false;
+      for (var i = 0; i < this.rows().length; i++) {
+        if (this.hasRowConflictAt(i)) {
+          condition = true;
+        }
+      }
+      return condition; // fixme
     },
 
 
