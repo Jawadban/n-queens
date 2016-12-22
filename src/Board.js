@@ -170,12 +170,49 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var counter = 0;
+      var k;
+      var j = minorDiagonalColumnIndexAtFirstRow;
+      if (this.rows().length === 1){
+        return false;
+      }
+      else if (this.rows().length === 2) {
+        k = 1;
+      } else if (this.rows().length === 3) {
+        k =3;
+      } else { 
+        k = this.rows().length*2 - 3;
+      }
+      if (minorDiagonalColumnIndexAtFirstRow > this.rows().length) {
+        k = this.rows().length;
+      } else {
+        k = minorDiagonalColumnIndexAtFirstRow;
+      }
+      console.log('jksdhfkljsdhflkjhsdfjkgskjhdgfjhkagsdfhjkgasjhkdgfhjsgdfhjg');
+      for (var i = 0; i < k; i ++) {
+        //debugger;
+        if (!!this.get(i)[j]) {
+          counter = counter + this.get(i)[j];
+        }
+        j --;
+      }
+      if (counter > 1) {
+        return true;
+      } else {
+        return false;
+      }
+      //return counter;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var l = this.rows().length;
+      for (var i = 0; i <= 2 * l - 3; i ++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
