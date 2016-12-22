@@ -154,41 +154,13 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      // var counter = 0;
-      // var initLength = majorDiagonalColumnIndexAtFirstRow;
-      // hasMajorDiagonalConflictAt(i + 1);
-      // for (var j = 0; i < this.rows().length; j++) {
-      //   for (var i = 0; i < this.rows().length; i++) {
-      //     if (!this.rows()[i][i + j]) {
-      //       counter ++;
-      //     }
-      //   }
-      //   if (counter > 1) {
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
-        
-      // }
 
-      // for (var j = 1; j < this.rows().length; j++) {
-      //   for (var i = 0; i < this.rows().length; i++) {
-      //     if (!this.rows()[i + j][i]) {
-      //       counter ++;
-      //     }
-      //   }
-      //   if (counter > 1) {
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
-        
-      // }
-
-
-
-
-      
+      for (var v = 0; v < this.rows().length - 1; v ++) {
+        if (this.hasMajorDiagonalConflictAt (v) || this.hasMajorDiagonalConflictAt (-v)) {
+          return true;
+        } 
+      }
+      return false;
     },
 
 
