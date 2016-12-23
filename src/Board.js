@@ -187,8 +187,8 @@
     hasAnyMinorDiagonalConflicts: function() {
       var condition = false;
       for (var i = 0; i < this.rows().length * 2; i++) {
-        if(this.hasMinorDiagonalConflictAt(i)) {
-         condition = true;
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          condition = true;
         }
       }
       return condition;

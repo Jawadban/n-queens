@@ -16,7 +16,7 @@
 
 // this is a cheeky version of solving the problem. 
 window.findNRooksSolution = function(n) {
-  var board = new Board({n:n});
+  var board = new Board({n: n});
   
   for (var i = 0; i < n; i++) {
     board.togglePiece(i, i);
@@ -27,27 +27,44 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var board = new Board({n:n});
-  var solutionCount = 0; //fixme
-  var findSolution = function (board, initialRow) {
-    if (initialRow === n) {
-      solutionCount++;
-      return;
+  //input = n
+  // output number of sol
+  // constraints ; 
+  // edge cases
+  var board = new Board({n: n});
+  var solutionCount = 0;
+
+  var recursiveSol = function (rows) {
+    if (rows === n) {
+      solutionCount ++;
     }
-    for (var i = 0; i < n; i++) {
-      board.togglePiece(initialRow, i);
-      if (!board.hasAnyColConflicts()) {
-        // if (initialRow < (n - 1)) {
-        findSolution(board, initialRow + 1);
-        // } else {
-          solutionCount++;
-        // }
+    for (var i = 0; i < n; i ++) {
+      board.togglePiece (rows, i);
+      if (!board.hasAnyRooksConflicts()) {
+        recursiveSol(rows + 1);
       }
-      board.togglePiece(initialRow, i);
+      board.togglePiece (rows, i);
     }
   };
-  findSolution(board, 0);
-  console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
+  recursiveSol(0);
+  // for (var i = 0; i < n; i++) {
+  //   for (var j = 0; j < n; j++) {
+  //     board.togglePiece(i, j);
+  //      if (!board.hasAnyRooksConflicts()) {
+  //       for (var k = 0; k < n; k ++) {
+  //         board.togglePiece(j + 1, k);
+  //         if (!board.hasAnyRooksConflicts()) {
+  //           for (var l = 0; l < n; l ++) {
+  //             board.togglePiece(j + 2, l);
+  //             if (!board.hasAnyRooksConflicts()) {
+  //               solutionCount ++;
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
   return solutionCount;
 };
 
